@@ -36,6 +36,26 @@ curl $my_snake_server_url/move \
           0
         ]
       ]
+    },
+    {
+      "taunt": "gotta go fast",
+      "name": "other-snake",
+      "id": "c35dcf26-7f48-492c-b7b5-94ae78fbc713",
+      "health_points": 50,
+      "coords": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
     }
   ],
   "height": 2,

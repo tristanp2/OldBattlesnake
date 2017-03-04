@@ -21,6 +21,7 @@ class SquareGrid:
         return 0 <= x < self.width and 0 <= y <= self.height
     
     def passable(self, _id):
+        print "Obstacles: ", _id, self.obstacles
         return _id not in self.obstacles
     
     def neighbors(self, _id):
@@ -81,7 +82,7 @@ def reconstruct_path(came_from, start, goal):
         path.append(current)
         path.reverse()
    
-    #print "Path:", path
+    print "Path:", path
     return path[1]
 
 def a_star_search(result, grid, start, goal):

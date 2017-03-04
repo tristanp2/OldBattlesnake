@@ -44,12 +44,13 @@ def move():
 
     print "Created snake with id = ", ID 
 
-    blockades =  np.array(map(lambda x: extend_head(x,me), data["snakes"]))[0]
+    blockades =  map(lambda x: extend_head(x,me), data["snakes"])
+    blockades = blockades[0]
     print "No go areas: {}".format(blockades)
 
     #TODO limit based to first N food or based on threshold
     food = map(tuple, data["food"])
-    #food.sort(manhattan) 
+    #food.sort(lambda xy: abs(xy[0] - me.head[0]) + abs(xy[1] - me.head[1])) 
     print "Food @ {}".format(food)
 
     move = me.gather_food(food, blockades)
@@ -67,13 +68,14 @@ def extend_head(snake, me):
     if snake["id"] == ID:
         print "Setting head position to {}".format(head)
         me.head = head
+        return coords
     
     coords.extend([(x+1, y), (x, y-1), (x-1, y), (x, y+1)])
     return coords
 
 def manhattan(xy):
     (x1,y1) = xy
-    (x2,y2) = my_snake.position
+    (x2,y2) = my_snake.head
     dx = abs(x1-x2)
     dy = abs(y1-y2)
     return dx + dy
