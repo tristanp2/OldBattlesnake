@@ -7,8 +7,8 @@ class SimpleGraph:
     def __init__(self):
         self.edges = {}
     
-    def neighbors(self, _id):
-        return self.edges[_id]
+    def neighbors(self, xy):
+        return self.edges[xy]
 
 class SquareGrid:
     def __init__(self, width, height):
@@ -16,16 +16,16 @@ class SquareGrid:
         self.height = height
         self.obstacles = [] #list of x,y coordinates
     
-    def in_bounds(self, _id):
-        (x, y) = _id
+    def in_bounds(self, xy):
+        (x, y) = xy
         return 0 <= x < self.width and 0 <= y <= self.height
     
-    def passable(self, _id):
-        print "Obstacles: ", _id, self.obstacles
-        return _id not in self.obstacles
+    def passable(self, xy):
+        print "Obstacles: ", xy, self.obstacles
+        return xy not in self.obstacles
     
-    def neighbors(self, _id):
-        (x, y) = _id
+    def neighbors(self, xy):
+        (x, y) = xy
         results = [(x+1, y), (x, y-1), (x-1, y), (x, y+1)]
         if (x + y) % 2 == 0: results.reverse() # aesthetics
         print "Neighbours at ", results
