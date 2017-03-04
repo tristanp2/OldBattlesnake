@@ -13,7 +13,7 @@ curl $my_snake_server_url/move \
          -H "Content-Type: application/json" \
          --data @- <<-REQUEST_BODY
 {
-  "you": "2c4d4d70-8cca-48e0-ac9d-03ecafca0c98",
+  "you": "a2facef2-b031-44ba-a36c-0859c389ef96",
   "width": 2,
   "turn": 0,
   "snakes": [
