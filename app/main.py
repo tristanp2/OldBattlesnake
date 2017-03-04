@@ -5,7 +5,7 @@ import numpy as np
 
 from snake import Snake
 
-ID = "2c4d4d70-8cca-48e0-ac9d-03ecafca0c98"
+#ID = "2c4d4d70-8cca-48e0-ac9d-03ecafca0c98"
 taunts = [ "you momma so fat", "yall a buncha noodles", "i smell a-star", "oh shit, a mongoose", "the food here sucks", "inertia is a property of matter" ]
 
 @bottle.route('/static/<path:path>')
@@ -38,12 +38,12 @@ def move():
     data = bottle.request.json
     print "Received move ..." #request:{}".format(data)
     
+    my_id = data["you"]
     board_width = data['width']
     board_height = data['height']
-    me = Snake(ID, board_height, board_width)
+    me = Snake(my_id, board_height, board_width)
 
-    print "Created snake with id = ", ID 
-    print "ID should be = ", data["you"] 
+    print "Created snake with id = ", my_id 
 
     blockades =  map(lambda x: extend_head(x,me), data["snakes"])
     blockades = blockades[0]
@@ -66,7 +66,7 @@ def extend_head(snake, me):
     print "Have snake: {} -> {}".format(snake["id"], coords)
     head = (x,y) = coords[0]
    
-    if snake["id"] == ID:
+    if snake["id"] == me.myid:
         print "Setting head position to {}".format(head)
         me.head = head
         return coords
