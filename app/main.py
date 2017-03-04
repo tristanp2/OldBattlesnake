@@ -44,7 +44,6 @@ def move():
 
     print "Created snake with id = ", ID 
 
-    #blockades = [ map(tuple, snake["coords"]) for snake in data["snakes"]  ]
     blockades =  np.array(map(lambda x: extend_head(x,me), data["snakes"])).flatten()
     print "No go areas: {}".format(blockades)
 
