@@ -2,6 +2,10 @@ import bottle
 import os
 import random
 
+from search import *
+from snake import Snake
+
+taunts = [ "you momma so fat" ]
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -14,6 +18,8 @@ def start():
     game_id = data['game_id']
     board_width = data['width']
     board_height = data['height']
+    
+    grid = SquareGrid(board_height, board_width)
 
     head_url = '%s://%s/static/head.png' % (
         bottle.request.urlparts.scheme,
@@ -26,7 +32,7 @@ def start():
         'color': '#00FF00',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url,
-        'name': 'battlesnake-python'
+        'name': 'NP-compete'
     }
 
 
@@ -39,7 +45,7 @@ def move():
 
     return {
         'move': random.choice(directions),
-        'taunt': 'battlesnake-python!'
+        'taunt': random.choice(taunts)
     }
 
 
