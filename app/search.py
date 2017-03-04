@@ -7,8 +7,8 @@ class SimpleGraph:
     def __init__(self):
         self.edges = {}
     
-    def neighbors(self, id):
-        return self.edges[id]
+    def neighbors(self, _id):
+        return self.edges[_id]
 
 class SquareGrid:
     def __init__(self, width, height):
@@ -16,19 +16,22 @@ class SquareGrid:
         self.height = height
         self.obstacles = [] #list of x,y coordinates
     
-    def in_bounds(self, id):
-        (x, y) = id
-        return 0 < x < self.width and 0 < y < self.height
+    def in_bounds(self, _id):
+        (x, y) = _id
+        return 0 <= x < self.width and 0 <= y <= self.height
     
-    def passable(self, id):
-        return id not in self.obstacles
+    def passable(self, _id):
+        return _id not in self.obstacles
     
-    def neighbors(self, id):
-        (x, y) = id
+    def neighbors(self, _id):
+        (x, y) = _id
         results = [(x+1, y), (x, y-1), (x-1, y), (x, y+1)]
         if (x + y) % 2 == 0: results.reverse() # aesthetics
+        print "Neighbours at ", results
         results = filter(self.in_bounds, results)
+        print "Neighbours that are inbounds: ", results
         results = filter(self.passable, results)
+        print "Neighbours that we can go to: ", results
         return results
 
     def pad_arr(vector, pad_width, iaxis, kwargs):
@@ -82,7 +85,8 @@ def reconstruct_path(came_from, start, goal):
     return path[1]
 
 def a_star_search(result, grid, start, goal):
-    
+    print "Starting at ", start 
+    print "Goal at ", goal 
     frontier = PriorityQueue()
     frontier.put(start, 0)
     came_from = {}
@@ -94,6 +98,7 @@ def a_star_search(result, grid, start, goal):
         current = frontier.get()
         
         if current == goal:
+            print "At goal, break"
             break
         
         for next in grid.neighbors(current):
