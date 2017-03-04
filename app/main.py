@@ -43,6 +43,7 @@ def move():
     me = Snake(ID, board_height, board_width)
 
     print "Created snake with id = ", ID 
+    print "ID should be = ", data["you"] 
 
     blockades =  map(lambda x: extend_head(x,me), data["snakes"])
     blockades = blockades[0]
