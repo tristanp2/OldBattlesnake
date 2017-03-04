@@ -65,7 +65,8 @@ def extend_head(snake, me):
     coords = map(tuple, snake["coords"])
     print "Have snake: {} -> {}".format(snake["id"], coords)
     head = (x,y) = coords[0]
-    print "snake[""id""] = {} me.myid = {} same? {}".format(snake["id"], me.myid, snake["id"] == me.myid) 
+    print "{} == {}".format(snake["id"], me.myid)
+
     if snake["id"] == me.myid:
         print "Setting head position to {}".format(head)
         me.head = head
