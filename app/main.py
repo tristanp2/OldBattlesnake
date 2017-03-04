@@ -6,7 +6,7 @@ import numpy as np
 from snake import Snake
 
 ID = "2c4d4d70-8cca-48e0-ac9d-03ecafca0c98"
-taunts = [ "you momma so fat" ]
+taunts = [ "you momma so fat", "yall a buncha noodles", "i smell a-star", "oh shit, a mongoose", "the food here sucks", "inertia is a property of matter" ]
 
 @bottle.route('/static/<path:path>')
 def static(path):
