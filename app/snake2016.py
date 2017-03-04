@@ -4,7 +4,10 @@ class Snake:
         self._id = _id
         self._position = position
         self._turn = turn
-    
+
+    def health(self):
+        return self._health
+
     def id(self):
         return self.id
     

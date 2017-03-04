@@ -32,7 +32,7 @@ def start():
         'name' : 'if !dead then drink++'
     }
 
-
+#@profile
 @bottle.post('/move')
 def move():
     data = bottle.request.json
@@ -44,18 +44,15 @@ def move():
 
     print "Created snake with id = ", ID 
 
-    blockades =  np.array(map(lambda x: extend_head(x,me), data["snakes"])).flatten()
+    blockades =  np.array(map(lambda x: extend_head(x,me), data["snakes"]))[0]
     print "No go areas: {}".format(blockades)
 
     #TODO limit based to first N food or based on threshold
     food = map(tuple, data["food"])
-    food.sort(manhattan) 
+    #food.sort(manhattan) 
     print "Food @ {}".format(food)
 
     move = me.gather_food(food, blockades)
-
-    #directions = ['up', 'down', 'left', 'right']
-     
 
     return {
         'move': move, #random.choice(directions),

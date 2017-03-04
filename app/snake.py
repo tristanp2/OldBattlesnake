@@ -8,7 +8,8 @@ class Snake:
         self._health = 100
         self._grid = search.SquareGrid(_height, _width)
 
-    def gather_food(self, food, blockades):
+    def gather_food(self, food, obstacles):
+        self._grid.obstacles = obstacles
         move = search.get_move(self._grid, self.head, food)
         return move
 

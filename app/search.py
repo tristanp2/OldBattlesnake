@@ -14,15 +14,14 @@ class SquareGrid:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.snakes = [] #list of x,y coordinates
+        self.obstacles = [] #list of x,y coordinates
     
     def in_bounds(self, id):
         (x, y) = id
-        #return 0 <= x < self.width and 0 <= y < self.height
         return 0 < x < self.width and 0 < y < self.height
     
     def passable(self, id):
-        return id not in self.snakes
+        return id not in self.obstacles
     
     def neighbors(self, id):
         (x, y) = id
@@ -107,7 +106,9 @@ def a_star_search(result, grid, start, goal):
  
 
     try:
+        print "Came from = {}, start = {}, goal = {}".format(came_from, start, goal)
         (x,y) = reconstruct_path(came_from, start, goal)
+        print "Next move = {},{}".format(x, y)
         result[0] = x
         result[1] = y
         result[2] = cost_so_far[goal]
@@ -162,7 +163,6 @@ def get_dir(a,b):
     return "left"
 
 def get_move(grid, curr_pos, food):
-
     move = ping(grid, curr_pos, food) 
     print "Moving to: ", move
     return move
