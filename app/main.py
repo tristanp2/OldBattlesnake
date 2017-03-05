@@ -49,11 +49,11 @@ def move():
 
     #TODO limit based to first N food or based on threshold
     food = map(tuple, data["food"])
-    print "Food @ {}".format(food)
+    #print "Food @ {}".format(food)
     #food.sort(lambda xy: abs(xy[0] - me.head[0]) + abs(xy[1] - me.head[1])) 
     food.sort(key=lambda xy: abs(xy[0] - me.head[0]) + abs(xy[1] - me.head[1])) 
     food = food[:3]
-    print "Food @ {}".format(food)
+    #print "Food @ {}".format(food)
 
     move = me.gather_food(food, blockades)
 
