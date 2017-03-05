@@ -21,18 +21,18 @@ class SquareGrid:
         return 0 <= x < self.width and 0 <= y <= self.height
     
     def passable(self, xy):
-        print "Obstacles: ", xy, self.obstacles
+        #print "Obstacles: ", xy, self.obstacles
         return xy not in self.obstacles
     
     def neighbors(self, xy):
         (x, y) = xy
         results = [(x+1, y), (x, y-1), (x-1, y), (x, y+1)]
         if (x + y) % 2 == 0: results.reverse() # aesthetics
-        print "Neighbours at ", results
+        #print "Neighbours at ", results
         results = filter(self.in_bounds, results)
-        print "Neighbours that are inbounds: ", results
+        #print "Neighbours that are inbounds: ", results
         results = filter(self.passable, results)
-        print "Neighbours that we can go to: ", results
+        #print "Neighbours that we can go to: ", results
         return results
 
     def pad_arr(vector, pad_width, iaxis, kwargs):
@@ -82,7 +82,7 @@ def reconstruct_path(came_from, start, goal):
         path.append(current)
         path.reverse()
    
-    print "Path:", path
+    #print "Path:", path
     return path[1]
 
 def a_star_search(result, grid, start, goal):
@@ -99,7 +99,7 @@ def a_star_search(result, grid, start, goal):
         current = frontier.get()
         
         if current == goal:
-            print "At goal, break"
+            #print "At goal, break"
             break
         
         for next in grid.neighbors(current):
@@ -162,7 +162,7 @@ def get_dir(a,b):
     (x1, y1) = a
     (x2, y2) = b
 
-    print "Going {} to {}".format(a,b)
+    #print "Going {} to {}".format(a,b)
 
     if x1 == x2:
         if y1 < y2: return "down"

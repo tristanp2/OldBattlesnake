@@ -13,8 +13,8 @@ curl $my_snake_server_url/move \
          -H "Content-Type: application/json" \
          --data @- <<-REQUEST_BODY
 {
-  "you": "a2facef2-b031-44ba-a36c-0859c389ef96",
-  "width": 2,
+  "you": "2c4d4d70-8cca-48e0-ac9d-03ecafca0c98",
+  "width": 10,
   "turn": 0,
   "snakes": [
     {
@@ -38,13 +38,10 @@ curl $my_snake_server_url/move \
       ]
     }
   ],
-  "height": 2,
+  "height": 10,
   "game_id": "a2facef2-b031-44ba-a36c-0859c389ef96",
   "food": [
-    [
-      1,
-      1
-    ]
+    [ 1,1 ], [2,2]
   ],
   "dead_snakes": [
     {

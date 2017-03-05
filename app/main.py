@@ -45,7 +45,7 @@ def move():
     board_height = data['height']
     me = Snake(my_id, board_height, board_width)
 
-    print "Created snake with id = ", my_id 
+    #print "Created snake with id = ", my_id 
 
     blockades =  map(lambda x: extend_head(x,me), data["snakes"])
     blockades = blockades[0]
@@ -54,6 +54,7 @@ def move():
     #TODO limit based to first N food or based on threshold
     food = map(tuple, data["food"])
     #food.sort(lambda xy: abs(xy[0] - me.head[0]) + abs(xy[1] - me.head[1])) 
+    food.sort(key=lambda xy: abs(xy[0] - me.head[0]) + abs(xy[1] - me.head[1])) 
     food = food[:3]
     #print "Food @ {}".format(food)
 
