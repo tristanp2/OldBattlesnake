@@ -18,7 +18,7 @@ def start():
     data = bottle.request.json
     game_id = data['game_id']
 
-    head_url = '%s://%s/static/head.png' % (
+    head_url = 'http://www.reactiongifs.com/r/rrr.gif' % (
         bottle.request.urlparts.scheme,
         bottle.request.urlparts.netloc
     )
