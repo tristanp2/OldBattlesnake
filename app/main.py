@@ -29,6 +29,8 @@ def start():
         'color': '#00FF00',
         'taunt': 'lets get it on!',
         'head_url': head_url,
+        'head_type': 'dead',
+        'tail_type': 'fat-rattle',
         'name' : 'if !dead then drink++'
     }
 
