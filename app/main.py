@@ -29,6 +29,8 @@ def start():
         'color': '#00FF00',
         'taunt': 'lets get it on!',
         'head_url': head_url,
+        'head_type': 'dead',
+        'tail_type': 'fat-rattle',
         'name' : 'if !dead then drink++'
     }
 
@@ -67,6 +69,7 @@ def extend_head(snake, me):
     print "Have snake: {} -> {}".format(snake["id"], coords)
     head = (x,y) = coords[0]
     print "{} == {}".format(snake["id"], me.myid)
+
     if snake["id"] == me.myid:
         print "Setting head position to {}".format(head)
         me.head = head
