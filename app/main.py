@@ -38,7 +38,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    print "Received move ..." #request:{}".format(data)
+    #print "Received move ..." #request:{}".format(data)
     
     my_id = data["you"]
     board_width = data['width']
@@ -49,13 +49,13 @@ def move():
 
     blockades =  map(lambda x: extend_head(x,me), data["snakes"])
     blockades = blockades[0]
-    print "No go areas: {}".format(blockades)
+    #print "No go areas: {}".format(blockades)
 
     #TODO limit based to first N food or based on threshold
     food = map(tuple, data["food"])
-    food.sort(lambda xy: abs(xy[0] - me.head[0]) + abs(xy[1] - me.head[1])) 
+    #food.sort(lambda xy: abs(xy[0] - me.head[0]) + abs(xy[1] - me.head[1])) 
     food = food[:3]
-    print "Food @ {}".format(food)
+    #print "Food @ {}".format(food)
 
     move = me.gather_food(food, blockades)
 
@@ -66,12 +66,12 @@ def move():
 
 def extend_head(snake, me):
     coords = map(tuple, snake["coords"])
-    print "Have snake: {} -> {}".format(snake["id"], coords)
+    #print "Have snake: {} -> {}".format(snake["id"], coords)
     head = (x,y) = coords[0]
-    print "{} == {}".format(snake["id"], me.myid)
+    #print "{} == {}".format(snake["id"], me.myid)
 
     if snake["id"] == me.myid:
-        print "Setting head position to {}".format(head)
+        #print "Setting head position to {}".format(head)
         me.head = head
         return coords
     
