@@ -24,7 +24,7 @@ def start():
     return {
         'color': '#00FF00',
         'taunt': 'lets get it on!',
-        'head_url': 'http://www.reactiongifs.com/r/rrr.gif',
+        'head_url': 'https://media.giphy.com/media/W8tVTtVKk88ww/giphy.gif',
         'head_type': 'dead',
         'tail_type': 'fat-rattle',
         'name' : 'if !dead then drink++'
