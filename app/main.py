@@ -18,17 +18,13 @@ def start():
     data = bottle.request.json
     game_id = data['game_id']
 
-    head_url = 'http://www.reactiongifs.com/r/rrr.gif' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
 
     # TODO: Do things with data
 
     return {
         'color': '#00FF00',
         'taunt': 'lets get it on!',
-        'head_url': head_url,
+        'head_url': 'http://www.reactiongifs.com/r/rrr.gif',
         'head_type': 'dead',
         'tail_type': 'fat-rattle',
         'name' : 'if !dead then drink++'
