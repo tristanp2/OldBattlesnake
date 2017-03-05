@@ -3,6 +3,8 @@ import ctypes
 from multiprocessing import Process as _Process, Array as _Array
 import numpy as _np
 
+MAX_COST = 100000
+
 class SimpleGraph:
     def __init__(self):
         self.edges = {}
@@ -18,7 +20,7 @@ class SquareGrid:
     
     def in_bounds(self, xy):
         (x, y) = xy
-        return 0 <= x < self.width and 0 <= y <= self.height
+        return 0 <= x < self.width and 0 <= y < self.height
     
     def passable(self, xy):
         #print "Obstacles: ", xy, self.obstacles
@@ -112,10 +114,11 @@ def a_star_search(result, grid, start, goal):
  
     result[0] = 0
     result[1] = 0
-    result[2] = 1000000 
+    result[2] = MAX_COST 
 
     try:
         #print "Came from = {}, start = {}, goal = {}".format(came_from, start, goal)
+        print "Valid path = {}".format(len(came_from) > 1)
         if len(came_from) > 1:
             (x,y) = reconstruct_path(came_from, start, goal)
             result[0] = x
@@ -145,15 +148,20 @@ def ping(grid, curr_pos, goals):
         p.join();
     
     print "Results:", result
-    cost = 1000000000000000000000 #result[0][2] 
+    cost = MAX_COST #result[0][2] 
     index = -1
     for i,x in enumerate(result):
         if x[2] < cost and x[2] > 0:
             cost = x[2]
             index = i
+   
+    next_move = grid.neighbors(curr_pos)[0] 
+    if index == -1:
+         print "Uh oh!"
+         next_move = neighbours(curr_pos)[0] 
+    else:
+         next_move = (result[index][0], result[index][1]) 
     
-
-    next_move = (result[index][0], result[index][1]) 
     move = get_dir(curr_pos, next_move) 
   
     return move

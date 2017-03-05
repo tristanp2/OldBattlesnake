@@ -41,7 +41,7 @@ curl $my_snake_server_url/move \
   "height": 10,
   "game_id": "a2facef2-b031-44ba-a36c-0859c389ef96",
   "food": [
-    [ 1,1 ], [2,2]
+    [2,2],[ 1,1 ] 
   ],
   "dead_snakes": [
     {
