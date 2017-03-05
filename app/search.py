@@ -34,7 +34,7 @@ class SquareGrid:
         results = filter(self.in_bounds, results)
         #print "Neighbours that are inbounds: ", results
         results = filter(self.passable, results)
-        #print "Neighbours that we can go to: ", results
+        print "Neighbours that we can go to: ", results
         return results
 
     def pad_arr(vector, pad_width, iaxis, kwargs):
@@ -148,16 +148,16 @@ def ping(grid, curr_pos, goals):
         p.join();
     
     print "Results:", result
+    valid = grid.neighbors(curr_pos)
     cost = MAX_COST #result[0][2] 
     index = -1
     for i,x in enumerate(result):
-        if x[2] < cost and x[2] > 0:
+        if x[2] < cost and x[2] > 0 and (x[0],x[1] in valid):
             cost = x[2]
             index = i
    
-    next_move = grid.neighbors(curr_pos)[0] 
     if index == -1:
-         print "Uh oh!"
+         print "Uh oh! Couldn't find anything"
          next_move = neighbours(curr_pos)[0] 
     else:
          next_move = (result[index][0], result[index][1]) 
@@ -170,11 +170,11 @@ def get_dir(a,b):
     (x1, y1) = a
     (x2, y2) = b
 
-    #print "Going {} to {}".format(a,b)
+    print "Going {} to {}".format(a,b)
 
     if x1 == x2:
-        if y1 < y2: return "down"
-        else: return "up"
+        if y1 < y2: return "up"
+        else: return "down"
     else:
         if x1 < x2: return "right"
 
