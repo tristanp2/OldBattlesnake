@@ -110,14 +110,17 @@ def a_star_search(result, grid, start, goal):
                 frontier.put(next, priority)
                 came_from[next] = current
  
+    result[0] = 0
+    result[1] = 0
+    result[2] = 1000000 
 
     try:
-        print "Came from = {}, start = {}, goal = {}".format(came_from, start, goal)
-        (x,y) = reconstruct_path(came_from, start, goal)
-        print "Next move = {},{}".format(x, y)
-        result[0] = x
-        result[1] = y
-        result[2] = cost_so_far[goal]
+        #print "Came from = {}, start = {}, goal = {}".format(came_from, start, goal)
+        if len(came_from) > 1:
+            (x,y) = reconstruct_path(came_from, start, goal)
+            result[0] = x
+            result[1] = y
+            result[2] = cost_so_far[goal]
     except:
         print "Error occured"
         
@@ -148,6 +151,7 @@ def ping(grid, curr_pos, goals):
         if x[2] < cost and x[2] > 0:
             cost = x[2]
             index = i
+    
 
     next_move = (result[index][0], result[index][1]) 
     move = get_dir(curr_pos, next_move) 
