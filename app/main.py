@@ -59,6 +59,7 @@ def move():
     food = food[:3]
     #print "Food @ {}".format(food)
 
+    
     move = me.gather_food(food, blockades)
 
     return {
@@ -68,7 +69,7 @@ def move():
 
 def extend_head(snake, me):
     coords = map(tuple, snake["coords"])
-    print "Have snake: {} -> {}".format(snake["id"], coords)
+    #print "Have snake: {} -> {}".format(snake["id"], coords)
     head = (x,y) = coords[0]
     #print "{} == {}".format(snake["id"], me.myid)
 

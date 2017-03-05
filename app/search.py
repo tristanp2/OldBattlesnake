@@ -20,10 +20,10 @@ class SquareGrid:
     
     def in_bounds(self, xy):
         (x, y) = xy
-        return 0 <= x < self.width and 0 <= y < self.height
+        return 0 < x < self.width-1 and 0 < y < self.height-1
     
     def passable(self, xy):
-        print "Obstacles: ", xy, self.obstacles
+        #print "Obstacles: ", xy, self.obstacles
         return xy not in self.obstacles
     
     def neighbors(self, xy):
@@ -44,7 +44,7 @@ class SquareGrid:
 
     def cost(self, from_node, to_node):
         if self.passable(to_node): return 1
-        return 1000
+        return MAX_COST
 
 import heapq
 class PriorityQueue:
@@ -84,9 +84,9 @@ def reconstruct_path(grid, came_from, start, goal):
         path.append(current)
         path.reverse()
    
-    print "Path:", path
+    #print "Path:", path
     valid = grid.neighbors(start)
-    print "Valid moves = ", valid
+    #print "Valid moves = ", valid
     next_move = [ p for p in path[1:] if p in valid ]
     
     if len(next_move) == 0:
