@@ -34,7 +34,7 @@ class SquareGrid:
         results = filter(self.in_bounds, results)
         #print "Neighbours that are inbounds: ", results
         results = filter(self.passable, results)
-        print "Neighbours that we can go to: ", results
+        #print "Neighbours that {} can go to {}".format(xy, results)
         return results
 
     def pad_arr(vector, pad_width, iaxis, kwargs):
@@ -76,7 +76,7 @@ def heuristic(a, b, _type='manhattan'):
     elif _type == 'euclidean':
         return D * (dx*dx + dy*dy)
 
-def reconstruct_path(came_from, start, goal):
+def reconstruct_path(grid, came_from, start, goal):
     current = goal
     path = [current]
     while current != start:
@@ -85,11 +85,16 @@ def reconstruct_path(came_from, start, goal):
         path.reverse()
    
     #print "Path:", path
-    return path[1]
+    valid = grid.neighbors(start)
+    #print "Valid moves = ", valid
+    next_move = [ p for p in path[1:] if p in valid ]
+    
+    if len(next_move) == 0:
+        return valid[0]
+    
+    return next_move[0] 
 
 def a_star_search(result, grid, start, goal):
-    print "Starting at ", start 
-    print "Goal at ", goal 
     frontier = PriorityQueue()
     frontier.put(start, 0)
     came_from = {}
@@ -112,20 +117,17 @@ def a_star_search(result, grid, start, goal):
                 frontier.put(next, priority)
                 came_from[next] = current
  
-    result[0] = 0
-    result[1] = 0
-    result[2] = MAX_COST 
 
     try:
-        #print "Came from = {}, start = {}, goal = {}".format(came_from, start, goal)
-        print "Valid path = {}".format(len(came_from) > 1)
-        if len(came_from) > 1:
-            (x,y) = reconstruct_path(came_from, start, goal)
-            result[0] = x
-            result[1] = y
-            result[2] = cost_so_far[goal]
+        (x,y) = reconstruct_path(grid, came_from, start, goal)
+        result[0] = x
+        result[1] = y
+        result[2] = cost_so_far[goal]
     except:
         print "Error occured"
+        result[0] = 0
+        result[1] = 0
+        result[2] = MAX_COST 
         
 
 
@@ -135,11 +137,7 @@ def ping(grid, curr_pos, goals):
     result = _np.ctypeslib.as_array(shared_array_base.get_obj())
     result = result.reshape(len(goals), 3)
   
-    #result = [ a_star_search([0,0,0], grid, current, goal) for goal in goals ]
-    #processes = [ _Process(target=a_star_search, args=(result, grid, current, goal)) ]
-
     processes = [ _Process(target=a_star_search, args=(result[i], grid, curr_pos, goal)) for i, goal in enumerate(goals) ]
-    
     
     for p in processes:
         p.start();
@@ -147,21 +145,14 @@ def ping(grid, curr_pos, goals):
     for p in processes:
         p.join();
     
-    print "Results:", result
-    valid = grid.neighbors(curr_pos)
-    cost = MAX_COST #result[0][2] 
+    cost = MAX_COST 
     index = -1
     for i,x in enumerate(result):
-        if x[2] < cost and x[2] > 0 and (x[0],x[1] in valid):
+        if x[2] < cost and x[2] > 0:  #and (x[0],x[1] in valid):
             cost = x[2]
             index = i
-   
-    if index == -1:
-         print "Uh oh! Couldn't find anything"
-         next_move = neighbours(curr_pos)[0] 
-    else:
-         next_move = (result[index][0], result[index][1]) 
-    
+  
+    next_move = (result[index][0], result[index][1]) 
     move = get_dir(curr_pos, next_move) 
   
     return move
@@ -173,8 +164,8 @@ def get_dir(a,b):
     print "Going {} to {}".format(a,b)
 
     if x1 == x2:
-        if y1 < y2: return "up"
-        else: return "down"
+        if y1 < y2: return "down"
+        else: return "up"
     else:
         if x1 < x2: return "right"
 
