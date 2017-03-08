@@ -52,7 +52,7 @@ def move():
     #blockades =  map(lambda x: extend_head(x,me), data["snakes"])
     blockades = []
     for snake in data["snakes"]:
-        temp = extend_head(snake, my_id)
+        temp = extend_head(snake, me)
         print "Snake coords: {}".format(temp)
         blockade.extend(temp)
 
