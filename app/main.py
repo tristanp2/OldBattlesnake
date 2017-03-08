@@ -49,8 +49,15 @@ def move():
 
     #print "Created snake with id = ", my_id 
 
-    blockades =  map(lambda x: extend_head(x,me), data["snakes"])
-    blockades = blockades[0]
+    #blockades =  map(lambda x: extend_head(x,me), data["snakes"])
+    blockades = []
+    for snake in data["snakes"]:
+        temp = extend_head(snake, my_id)
+        print "Snake coords: {}".format(temp)
+        blockade.extend(temp)
+
+    print "No go before: {}".format(blockades)
+    #blockades = blockades[0]
     print "No go areas: {}".format(blockades)
     
     #TODO limit based to first N food or based on threshold
