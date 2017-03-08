@@ -54,7 +54,7 @@ def move():
     for snake in data["snakes"]:
         temp = extend_head(snake, me)
         print "Snake coords: {}".format(temp)
-        blockade.extend(temp)
+        blockades.extend(temp)
 
     print "No go before: {}".format(blockades)
     #blockades = blockades[0]
