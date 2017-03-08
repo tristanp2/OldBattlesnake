@@ -23,7 +23,7 @@ class SquareGrid:
         return 0 < x < self.width-1 and 0 < y < self.height-1
     
     def passable(self, xy):
-        print "Obstacles: ", xy, self.obstacles
+        #print "Obstacles: ", xy, self.obstacles
         return xy not in self.obstacles
     
     def neighbors(self, xy):
@@ -34,7 +34,7 @@ class SquareGrid:
         results = filter(self.in_bounds, results)
         #print "Neighbours that are inbounds: ", results
         results = filter(self.passable, results)
-        #print "Neighbours that {} can go to {}".format(xy, results)
+        print "Neighbours that {} can go to {}".format(xy, results)
         return results
 
     def pad_arr(vector, pad_width, iaxis, kwargs):
