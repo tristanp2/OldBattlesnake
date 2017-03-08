@@ -23,7 +23,7 @@ class SquareGrid:
         return 0 < x < self.width-1 and 0 < y < self.height-1
     
     def passable(self, xy):
-        #print "Obstacles: ", xy, self.obstacles
+        print "Obstacles: ", xy, self.obstacles
         return xy not in self.obstacles
     
     def neighbors(self, xy):
