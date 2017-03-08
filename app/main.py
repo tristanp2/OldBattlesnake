@@ -39,6 +39,7 @@ def move():
     my_id = data["you"]
     board_width = data['width']
     board_height = data['height']
+    print "Our snake? {} ".format(data["snakes": my_id])
     me = Snake(my_id, board_height, board_width)
 
     #print "Created snake with id = ", my_id 

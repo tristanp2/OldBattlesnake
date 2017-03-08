@@ -86,7 +86,7 @@ def reconstruct_path(grid, came_from, start, goal):
    
     #print "Path:", path
     valid = grid.neighbors(start)
-    #print "Valid moves = ", valid
+    print "Valid moves = ", valid
     next_move = [ p for p in path[1:] if p in valid ]
     
     if len(next_move) == 0:
