@@ -45,15 +45,14 @@ def move():
         if snake["id"] == my_id:
             our_snake = snake
 
-    print "Our snake? {} ".format(our_snake["coords"])
     me = Snake(my_id, board_height, board_width)
 
     #print "Created snake with id = ", my_id 
 
     blockades =  map(lambda x: extend_head(x,me), data["snakes"])
     blockades = blockades[0]
-    #print "No go areas: {}".format(blockades)
-
+    print "No go areas: {}".format(blockades)
+    
     #TODO limit based to first N food or based on threshold
     food = map(tuple, data["food"])
     #print "Food @ {}".format(food)

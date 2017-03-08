@@ -34,7 +34,7 @@ class SquareGrid:
         results = filter(self.in_bounds, results)
         #print "Neighbours that are inbounds: ", results
         results = filter(self.passable, results)
-        print "Neighbours that {} can go to {}".format(xy, results)
+        #print "Neighbours that {} can go to {}".format(xy, results)
         return results
 
     def pad_arr(vector, pad_width, iaxis, kwargs):
